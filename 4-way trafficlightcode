@@ -1,15 +1,19 @@
-int S1=2;
-int M1=3;////North
-int C1=4;
-int S2=5;
-int M2=6;////South
-int C2=7;
-int S3=8;
-int M3=9;////East
-int C3=10;
-int S4=11;
-int M4=12;////West
-int C4=13;
+int S1_Red=2;
+int M1_Yellow=3;/////North
+int C1_Green=4;
+
+int S2_Red=5;
+int M2_Yellow=6;////South
+int C2_Green=7;
+
+int S3_Red=8;
+int M3_Yellow=9;////East
+int C3_Green=10;
+
+int S4_Red=11;
+int M4_Yellow=12;////West
+int C4_Green=13;
+
 void setup(){
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
@@ -24,33 +28,37 @@ void setup(){
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
 }
+
 void loop(){
-digitalWrite(S1,Low);
-digitalWrite(M1,High);
+digitalWrite(S1_Red,Low);
+digitalWrite(C1_Green,High);
 delay(6000);         ////North
-digitalWrite(C1,Low);
-digitalWrite(M1,High);
+digitalWrite(C1_Green,Low);
+digitalWrite(M1_Yellow,High);
 delay(3000);
-digitalWrite(S1,High);
-digitalWrite(S2,Low);
-digitalWrite(C2,HIGH);
+digitalWrite(S1_Red,High);
+
+digitalWrite(S2_Red,Low);
+digitalWrite(C2_Green,HIGH);
 delay(6000);        ////South    
-digitalWrite(C2,Low);
-digitalWrite(M2,HIGH);
+digitalWrite(C2_Green,Low);
+digitalWrite(M2_Yellow,High);
 delay(3000);
-digitalWrite(S2,HIGH);
-digitalWrite(S3,Low);
-digitalWrite(C3,HIGH);
+digitalWrite(S2_Red,High);
+
+digitalWrite(S3_Red,Low);
+digitalWrite(C3_Green,High);
 delay(6000);         ////East
-digitalWrite(C3,Low);
-digitalWrite(M3,HIGH);
+digitalWrite(C3_Green,Low);
+digitalWrite(M3_Yellow,High);
 delay(3000);
-digitalWrite(S3,HIGH);
-digitalWrite(S4,Low);
-digitalWrite(C4,HIGH);
+digitalWrite(S3_Red,High);
+
+digitalWrite(S4_Red,Low);
+digitalWrite(C4_Green,HIGH);
 delay(6000);          ////West
-digitalWrite(C4,Low);
-digitalWrite(M4,HIGH);
+digitalWrite(C4_Green,Low);
+digitalWrite(M4_Yellow,High);
 delay(3000);
-digitalWrite(S4,HIGH);
+digitalWrite(S4_Red,High);
 }
