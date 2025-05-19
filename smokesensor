@@ -17,7 +17,7 @@ pinMode(8, OUTPUT);
 Serial.begin(9600);
 lcd.begin();
 lcd.backlight();
- lcd.setCursor(0, 0);
+ lcd.setCursor(0,1);
 lcd.print("Smoke Detector");
  delay(2000);
 lcd.clear();
