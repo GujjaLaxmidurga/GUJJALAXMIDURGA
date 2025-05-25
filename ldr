@@ -1,0 +1,20 @@
+int ldropin - A0;
+int ledpin - 3;
+
+int ldrValue - 0;
+int ledbright - 0;
+
+void loop(){
+   pinMode(ledpin,OUTPUT);
+   pinMode(ledpin,INPUT);
+
+)
+
+void Loop(){
+
+||real||
+
+int ldrvalue - analogRead(ldrpin);
+int brightness - nap9ldrvalue,0,1023,255,0);|| dark to bright||
+  analogWrite(ledpin,brightness);
+delay(500);
