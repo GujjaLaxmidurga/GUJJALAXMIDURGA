@@ -1,20 +1,22 @@
-int ldropin - A0;
-int ledpin - 3;
+define int LDRPin = A0;      // Analog pin connected to LDR
+define int LEDPin = 13;      // Digital pin connected to LED
+define int threshold = 600;  // Threshold value
 
-int ldrValue - 0;
-int ledbright - 0;
+void setup() {
+  pinMode(LEDPin, OUTPUT);
+  Serial.begin(9600); 
+}
 
-void loop(){
-   pinMode(ledpin,OUTPUT);
-   pinMode(ledpin,INPUT);
+void loop() {
+  lightLevel = analogRead(LDRPin);
 
-)
+  Serial.print("Light Level: ");
+  Serial.println(lightLevel);
+  if (lightLevel < threshold) {
+    digitalWrite(LEDPin, HIGH);  // Turn LED ON
+  } else {
+    digitalWrite(LEDPin, LOW);   // Turn LED OFF
+  }
 
-void Loop(){
-
-||real||
-
-int ldrvalue - analogRead(ldrpin);
-int brightness - nap9ldrvalue,0,1023,255,0);|| dark to bright||
-  analogWrite(ledpin,brightness);
-delay(500);
+  delay(500); // Small delay to avoid flooding serial output
+}
