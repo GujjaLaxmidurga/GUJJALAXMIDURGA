@@ -1,22 +1,28 @@
-define int LDRPin = A0;      // Analog pin connected to LDR
-define int LEDPin = 13;      // Digital pin connected to LED
-define int threshold = 600;  // Threshold value
+define int LDRPin = A0;     
+define buzzer = 7; 
+define relay = 8;
+define Threshold = 600;  
 
 void setup() {
-  pinMode(LEDPin, OUTPUT);
-  Serial.begin(9600); 
+pinMode(LDRpin,INPUT);
+pinMode(buzzer, OUTPUT);
+pinMode(relay,OUTPUT);
+Serial.begin(9600); 
 }
 
 void loop() {
-  lightLevel = analogRead(LDRPin);
-
-  Serial.print("Light Level: ");
-  Serial.println(lightLevel);
-  if (lightLevel < threshold) {
-    digitalWrite(LEDPin, HIGH);  // Turn LED ON
-  } else {
-    digitalWrite(LEDPin, LOW);   // Turn LED OFF
-  }
-
-  delay(500); // Small delay to avoid flooding serial output
+int ldrValue = analogRead(LDRPin);
+Serial.print(ldrValue);
+if (ldrvalue < threshold)
+{
+digitalWrite(relay, HIGH); 
+digitalWrite(buzzer,HIGH);
+delay(3000);
+digitalWrite(buzzer, LOW);  
+}
+else{
+digitalWrite(relay,LOW);
+digitalWrite(buzzer,LOW);
+}
+delay(500); 
 }
