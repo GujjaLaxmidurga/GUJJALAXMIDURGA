@@ -1,37 +1,35 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0*27,16,2);
 
-const int TRIG_PIN = 6; //Arduino pin connected to ultrasonic sensor's TRIGpin 
-const int ECHO_PIN = 7;// Arduino pin connected to ultrasonic sensor's ECHO pin 
-const int RELAY_PIN=9;///Arduino pin connected to ultrasonic sensor's  RELAY pin
-const int BUZZER_PIN = 13; 
-const int motor=10;
-///Arduino pin connected to ultrasonic sensor's  Piezo Buzzer pin
-const int DISTANCE_THRESHOLD = 50; 
-float duration_us,distance_cm;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+const int TRIG_PIN = 6; // Arduino pin connected to ultrasonic sensor's TRIG pin
+const int ECHO_PIN = 7; // Arduino pin connected to ultrasonic sensor's ECHO pin
+const int RELAY_PIN = 9; // Arduino pin connected to relay pin
+const int BUZZER_PIN = 13; // Arduino pin connected to piezo buzzer pin
+const int DISTANCE_THRESHOLD = 50; // Distance threshold in cm
+
+float duration_us, distance_cm;
 
 void setup() {
-
-  pinMode(6, OUTPUT);
-  pinMode(7, INPUT);
-  pinMode(13, OUTPUT);
-  pinMode (9, OUTPUT);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(RELAY_PIN, OUTPUT);
   Serial.begin(9600);
-  'LiquidCrystal_I2C::begin()';
+  lcd.init();
   lcd.backlight();
-
 }
 
 void loop() {
-//generate 10 -microsecond pulse to TRIG pin
-  digitalWrite(6, HIGH);
+  // Generate 10-microsecond pulse to TRIG pin
+  digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
-  digitalWrite(6, LOW);
+  digitalWrite(TRIG_PIN, LOW);
 
-// measure duration of pulse from ECHO pin 
-  duration_us = pulseIn(7, HIGH);
-  distance_cm = 0.017 * duration_us;/// calculate the distance 
+  // Measure duration of pulse from ECHO pin
+  duration_us = pulseIn(ECHO_PIN, HIGH);
+  distance_cm = 0.017 * duration_us; // Calculate the distance
 
   lcd.setCursor(0, 0);
   lcd.print("Distance: ");
@@ -39,23 +37,17 @@ void loop() {
   lcd.print(distance_cm);
   lcd.print(" cm");
 
-  if (distance_cm < 50) 
-{
-    digitalWrite(13, HIGH);//Buzzer on
-    digitalWrite(9,HIGH);//relay(water pump) on
-  } 
-else 
-{
-    digitalWrite(13, LOW);//Buzzer off
-     digitalWrite (9,LOW);//relay off
+  if (distance_cm < DISTANCE_THRESHOLD) {
+    digitalWrite(BUZZER_PIN, HIGH); // Buzzer on
+    digitalWrite(RELAY_PIN, HIGH); // Relay (water pump) on
+  } else {
+    digitalWrite(BUZZER_PIN, LOW); // Buzzer off
+    digitalWrite(RELAY_PIN, LOW); // Relay off
   }
 
-  Serial.print("distance:");
+  Serial.print("Distance: ");
   Serial.print(distance_cm);
-  Serial.println("cm");
+  Serial.println(" cm");
+
   delay(500);
-
-
 }
-
-
