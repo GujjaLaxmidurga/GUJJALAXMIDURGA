@@ -3,21 +3,22 @@
 LiquidCrystal_I2C lcd(0*27,16,2);
 
 const int TRIG_PIN = 6; //Arduino pin connected to ultrasonic sensor's TRIGpin 
-const int ECHO_PIN = 7;// Arduino pin connected to ultrasonic sensor's ECHO pin
-const int RELAY_PIN=9///Arduino pin connected to ultrasonic sensor's  RELAY pin
+const int ECHO_PIN = 7;// Arduino pin connected to ultrasonic sensor's ECHO pin 
+const int RELAY_PIN=9;///Arduino pin connected to ultrasonic sensor's  RELAY pin
 const int BUZZER_PIN = 13; 
+const int motor=10;
 ///Arduino pin connected to ultrasonic sensor's  Piezo Buzzer pin
 const int DISTANCE_THRESHOLD = 50; 
-float duration _us,distance_cm;
+float duration_us,distance_cm;
 
 void setup() {
-  
+
   pinMode(6, OUTPUT);
   pinMode(7, INPUT);
   pinMode(13, OUTPUT);
   pinMode (9, OUTPUT);
-  serial.begin(9600);
-  lcd.begin();
+  Serial.begin(9600);
+  'LiquidCrystal_I2C::begin()';
   lcd.backlight();
 
 }
@@ -49,10 +50,12 @@ else
      digitalWrite (9,LOW);//relay off
   }
 
-  Serial.print("distance: ");
+  Serial.print("distance:");
   Serial.print(distance_cm);
-  Serial.println(" cm");
+  Serial.println("cm");
   delay(500);
 
 
 }
+
+
