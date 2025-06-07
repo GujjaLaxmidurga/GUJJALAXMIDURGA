@@ -1,0 +1,34 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+const int pirSensorPin = 2; // Digital input pin for PIR sensor
+
+void setup() {
+  Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
+  pinMode(pirSensorPin, INPUT);
+}
+
+void loop() {
+  int pirValue = digitalRead(pirSensorPin);
+  Serial.print("PIR Value: ");
+  Serial.println(pirValue);
+
+  lcd.setCursor(0, 0);
+  lcd.print("Motion Status: ");
+
+  if (pirValue == HIGH) {
+    lcd.setCursor(0, 1);
+    lcd.print("Motion Detected!");
+    Serial.println("Motion detected!");
+  } else {
+    lcd.setCursor(0, 1);
+    lcd.print("No Motion");
+    Serial.println("No motion detected.");
+  }
+
+  delay(500);
+}
